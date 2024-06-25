@@ -1,0 +1,687 @@
+<!-- outer.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小组项目</title>
+    <style>
+        .if{
+            width: 100%;
+            border: 0px solid #000;
+         }
+        .container {
+            width: 100%;
+            border: 1px solid #000;
+
+            background-color: rgba(102, 146, 191, 0.44);
+            /*边框*/
+            border: solid 1px rgba(102, 146, 191, 0.68);
+            /*边角弧度*/
+            border-radius: 60px;
+            /*阴影*/
+            -moz-box-shadow:2px 2px 5px #333333; 
+            -webkit-box-shadow:2px 2px 5px #333333; 
+            box-shadow: 7px 15px 30px #285a63;
+            /*延迟过度*/    
+            transition: all 0.3s linear;/*0.3s过渡时间*/
+            -moz-transition: all 0.3s linear; /* Firefox 4 */
+            -webkit-transition: all 0.3s linear; /* Safari 和 Chrome */
+            
+        }
+         
+        .container:hover{
+            /*边框*/
+            border: solid 1px rgba(102, 146, 191, 0.68);
+            /*边角弧度*/
+            border-radius: 10px;
+            box-shadow: 7px 15px 30px #285a63;
+        }
+        /* 头部 */
+        .header {
+            background-color: #f0f0f0;
+            padding: 10px;
+            text-align: center;
+        }
+        .content {
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        h2{text-align: center;}
+         /* 背景图片 */
+         .bjimg{
+            position: fixed;
+            right: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            object-fit: cover;
+         }
+    
+         /* 手风琴效果 */
+         /* 手风琴效果就是鼠标悬浮宽度过渡 */
+        .item {
+            box-sizing: border-box;
+            display: inline-flex;
+            align-items: center;
+            height: 30px;
+            /* 手风琴效果就是鼠标悬浮宽度过渡 */
+            width: 60px;
+            margin: 4px 8px;
+            /* 超出隐藏，因为要把伪元素文字遮挡住 */
+            overflow: hidden;
+            background: #fff;
+            border-radius: 30px;
+            box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.24);
+            transition: all 0.5s;
+        }
+
+        .item:hover {
+            width: 180px;
+            border: none;
+        }
+
+        /* 悬浮加背景色 */
+        .first:hover .icon {
+            background-color: pink;
+        }
+
+        .second:hover .icon {
+            background-color: #e9e9e9;
+        }
+
+        .third:hover .icon {
+            background-color: pink;
+        }
+
+        .fouth:hover .icon {
+            background-color: #e9e9e9;
+        }
+
+        .icon {
+            width: 60px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30px;
+            font-size: 28px;
+            position: relative;
+            transition: all 0.5s;
+            /* 真实元素阻止鼠标事件，伪元素自动鼠标事件 */
+            pointer-events: none;
+        }
+
+        /* 通过伪元素添加内容介绍文字 */
+        .item:nth-child(1) .icon::after {
+            position: absolute;
+            content: '图表展示';
+            /* 宽度随着内容自适应 */
+            /* 宽度随着内容变多边长 */
+            width: fit-content;
+            /* 超出部分隐藏 */
+            /* 文字不换行 */
+            word-break: keep-all;
+            /* 设置伪元素文字大小为中等大小 */
+            font-size: medium;
+            left: 72px;
+            /* 真实元素阻止鼠标事件，伪元素自动鼠标事件 */
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .item:nth-child(2) .icon::after {
+            position: absolute;
+            content: '图二';
+            width: fit-content;
+            word-break: keep-all;
+            font-size: medium;
+            left: 72px;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .item:nth-child(3) .icon::after {
+            position: absolute;
+            content: '图三';
+            width: fit-content;
+            word-break: keep-all;
+            font-size: medium;
+            left: 72px;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .item:nth-child(4) .icon::after {
+            position: absolute;
+            content: '图四';
+            width: fit-content;
+            word-break: keep-all;
+            font-size: medium;
+            left: 72px;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        /* 鼠标悬浮加文字下划线（给伪元素添加hover样式） */
+        .icon:hover::after {
+            text-decoration: underline;
+        }
+
+
+        .main{
+            background-color: rgba(102, 146, 191, 0.44);
+            /*边框*/
+            border: solid 1px rgba(102, 146, 191, 0.68);
+            /*边角弧度*/
+            border-radius: 10px;
+            /*阴影*/
+            -moz-box-shadow:2px 2px 5px #333333; 
+            -webkit-box-shadow:2px 2px 5px #333333; 
+            box-shadow: 7px 15px 30px #285a63;
+            /* 设置阴影模糊半径 */
+        }
+
+
+        /* 按钮样式 */
+        .button {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #f4511e;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 28px;
+            padding: 20px;
+            width: 200px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+            }
+            .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+            }
+            .button span:after {
+            content: '\00bb';  
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+            }
+            .button:hover span {
+            padding-right: 25px;
+            }
+            .button:hover span:after {
+            opacity: 1;
+            right: 0;
+            }
+
+            .scale-up-btn1{
+                background-color: rgb(36, 42, 31);
+                color: white;
+                padding: 10px 30px;
+                margin:20px;
+                border: none;
+                transition: transform 0.5s ease;
+                transform: scale(1);
+                border-radius:10px;
+            }
+            .scale-up-btn1:hover {
+                transform: scale(1.2);
+                background-color: rgb(228, 117, 6);
+            }
+
+            .scale-up-btn2{
+                background-color: rgb(147, 48, 121);
+                color: white;
+                padding: 10px 30px;
+                margin:20px;
+                border: none;
+                transition: transform 0.5s ease;
+                transform: scale(1);
+                border-radius:10px;
+            }
+            .scale-up-btn2:hover {
+                transform: scale(1.2);
+                background-color: rgb(28, 141, 109);
+            }
+
+            .scale-up-btn3{
+                background-color: rgb(37, 159, 157);
+                color: white;
+                padding: 10px 30px;
+                margin:20px;
+                border: none;
+                transition: transform 0.5s ease;
+                transform: scale(1);
+                border-radius:10px;
+            }
+            .scale-up-btn3:hover {
+                transform: scale(1.2);
+                background-color: rgb(95, 103, 5);
+            }
+
+
+            .scale-up-btn4{
+                background-color: rgb(68, 59, 111);
+                color: white;
+                padding: 10px 30px;
+                margin:20px;
+                border: none;
+                transition: transform 0.5s ease;
+                transform: scale(1);
+                border-radius:10px;
+            }
+            .scale-up-btn4:hover {
+                transform: scale(1.2);
+                background-color: rgb(16, 105, 188);
+            }
+
+            .scale-up-btn5{
+                background-color: rgb(230, 77, 179);
+                color: white;
+                padding: 10px 30px;
+                margin:20px;
+                border: none;
+                transition: transform 0.5s ease;
+                transform: scale(1);
+                border-radius:10px;
+            }
+            .scale-up-btn5:hover {
+                transform: scale(1.2);
+                background-color: rgb(250, 230, 156);
+            }
+
+            .scale-up-btn6{
+                background-color: rgb(189, 234, 206);
+                color: white;
+                padding: 10px 30px;
+                margin:20px;
+                border: none;
+                transition: transform 0.5s ease;
+                transform: scale(1);
+                border-radius:10px;
+            }
+            .scale-up-btn6:hover {
+                transform: scale(1.2);
+                background-color: rgb(66, 22, 142);
+            }
+
+            .scale-up-btn7{
+                background-color: rgb(46, 169, 95);
+                color: white;
+                padding: 10px 30px;
+                margin:20px;
+                border: none;
+                transition: transform 0.5s ease;
+                transform: scale(1);
+                border-radius:10px;
+            }
+            .scale-up-btn7:hover {
+                transform: scale(1.2);
+                background-color: rgb(68, 68, 68);
+            }
+
+            .scale-up-btn {
+            background-color: rgb(104, 156, 61);
+            color: white;
+            padding: 10px 30px;
+            margin:20px;
+            border: none;
+            transition: transform 0.5s ease;
+            transform: scale(1);
+            border-radius:10px;
+            }
+            .scale-up-btn:hover {
+                transform: scale(1.2);
+                background-color: rgb(120, 74, 110);
+            }
+
+
+            .box{
+            visibility:hidden;
+            opacity:0;
+            transform:translateY(100px);
+            transition:.3s;
+            }
+            .show{
+            visibility:visible;
+            opacity:1;
+            transform:translateY(0);
+            }
+
+
+            
+        
+    </style>
+</head>
+<body>
+    <video src="ccc.mp4" class="bjimg" autoplay loop muted></video>
+<button type="button" onclick="show()" class="scale-up-btn">第一张图</button>
+<button type="button" onclick="show1()" class="scale-up-btn1" class="scale-up-btn">第二张图</button>
+<button type="button" onclick="show2()" class="scale-up-btn2" class="scale-up-btn">第三张图</button>
+<button type="button" onclick="show3()" class="scale-up-btn3" class="scale-up-btn">第四张图</button>
+<button type="button" onclick="show4()" class="scale-up-btn4" class="scale-up-btn" style="float:right">man</button>
+<button type="button" onclick="show5()" class="scale-up-btn5" class="scale-up-btn" style="float:right">see you again</button>
+<button type="button" onclick="show6()" class="scale-up-btn6" class="scale-up-btn" style="float:right">the last song</button>
+<button type="button" onclick="show7()" class="scale-up-btn7" class="scale-up-btn" style="float:right">dying in the sun</button>
+
+<div class="container">
+        <div class="content">
+            <table>
+                <tr id="box" class="box" hidden>
+                    <td style="width: 100%">
+                           <div> 
+                                <div class="item">
+                                    <div onclick="clickAfter('图一')" style="color: #DD3B32;" class ="icon">🏀</div>
+
+                                </div>
+                                <iframe src="NBA.html" class=''if" width="100%"  height="1000" ></iframe>
+                           </div>
+                    </td>
+                </tr>
+            </table>
+
+            <table>
+                <tr id="box1" class="box" hidden>
+                    <td style="width: 100%">
+                           <div> 
+                                <div class="item">
+                                    <div onclick="clickAfter('图二')" style="color: #DD3B32;" class ="icon">🏀</div>
+
+                                </div>
+                                <iframe src="scatter3d.html" class=''if" width="100%"  height="1000" ></iframe>
+                           </div>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr id="box2" class="box" hidden>
+                    <td style="width: 100%">
+                           <div> 
+                                <div class=" item item:nth-child(2) third">
+                                    <div onclick="clickAfter('头部')" style="color: #DD3B32;" class ="icon">🏀</div>
+
+                                </div>
+                                <iframe src="all_years_radar.html" class=''if" width="100%"  height="1000" ></iframe>
+                           </div>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr id="box3" class="box" hidden>
+                    <td style="width: 100%">
+                           <div> 
+                                <div class="item fourth">
+                                    <div onclick="clickAfter('头部')" style="color: #DD3B32;" class ="icon">🏀</div>
+
+                                </div>
+                                <iframe src="pictorialbar_multi_custom_symbols.html" class=''if" width="100%"  height="1000" ></iframe>
+                           </div>
+                    </td>
+                </tr>
+            </table> 
+               
+        </div>
+</div>   
+<audio controls  hidden id="music1">
+  <!-- <source src="man.mp3" type="audio/mpeg"> -->
+  <source src="man.mp3" type="audio/mpeg">
+
+  <!-- <source src="horse.mp3" type="audio/mpeg"> -->
+</audio>
+<audio controls loop hidden id="music2">
+  <!-- <source src="man.mp3" type="audio/mpeg"> -->
+  <source src="seeyou.mp3" type="audio/mpeg">
+
+  <!-- <source src="horse.mp3" type="audio/mpeg"> -->
+</audio>
+
+<audio controls loop hidden id="music3">
+    <!-- <source src="man.mp3" type="audio/mpeg"> -->
+     <source src="last.mp3" type="audio/mpeg">
+</audio>
+
+<audio controls loop hidden id="music4">
+    <!-- <source src="man.mp3" type="audio/mpeg"> -->
+     <source src="dying.mp3" type="audio/mpeg">
+</audio>
+
+
+ <!-- <video src="dd.mp4" class="bjimg" autoplay loop muted></video> -->
+
+<script>
+    function show(){
+        // var x = document.querySelectorAll(".scale-up-btn")
+        var x = document.getElementById('box1')
+        var y = document.getElementById('box2')
+        var z = document.getElementById('box3')
+        // var x = document.querySelectorAll(".button")
+        // for(var i = 0; i < x.length; i++){
+            // document.write(x[i].hidden)
+        if(!x.hidden){
+            // document.write(x.hidden)
+            x.classList.remove("show");
+            setTimeout(()=>{
+            x.hidden = true;
+        }, 380)
+            // }
+        }
+        else if(!y.hidden){
+            y.classList.remove("show");
+            setTimeout(()=>{
+                y.hidden = true;
+            })
+        }
+        else if(!z.hidden){
+            z.classList.remove("show");
+            setTimeout(()=>{
+                z.hidden = true;
+            })
+        }
+
+        var t = document.getElementById('box');//选取id为test的元素
+        if(t.hidden){
+            t.hidden = false;
+            setTimeout(function(){
+                t.classList.add("show");
+            },100)
+            // t.classList.add("show");
+        }else{
+            t.classList.remove("show");
+            setTimeout(function(){
+                t.hidden = true;
+            }, 380)
+        }
+    }
+
+    function show1(){
+        // var x = document.querySelectorAll(".scale-up-btn")
+        var x = document.getElementById('box')
+        var y = document.getElementById('box2')
+        var z = document.getElementById('box3')
+        // var x = document.querySelectorAll(".button")
+        // for(var i = 0; i < x.length; i++){
+            // document.write(x[i].hidden)
+        if(!x.hidden){
+            // document.write(x.hidden)
+            x.classList.remove("show");
+            setTimeout(()=>{
+            x.hidden = true;
+        }, 380)
+            // }
+        }
+        else if(!y.hidden){
+            y.classList.remove("show");
+            setTimeout(()=>{
+                y.hidden = true;
+            })
+        }
+        else if(!z.hidden){
+            z.classList.remove("show");
+            setTimeout(()=>{
+                z.hidden = true;
+            })
+        }
+
+        var t = document.getElementById('box1');//选取id为test的元素
+        if(t.hidden){
+            t.hidden = false;
+            setTimeout(function(){
+                t.classList.add("show");
+            },100)
+            // t.classList.add("show");
+        }else{
+            t.classList.remove("show");
+            setTimeout(function(){
+                t.hidden = true;
+            }, 380)
+        }
+    }
+
+    function show2(){
+        // var x = document.querySelectorAll(".scale-up-btn")
+        var x = document.getElementById('box')
+        var y = document.getElementById('box1')
+        var z = document.getElementById('box3')
+        // var x = document.querySelectorAll(".button")
+        // for(var i = 0; i < x.length; i++){
+            // document.write(x[i].hidden)
+        if(!x.hidden){
+            // document.write(x.hidden)
+            x.classList.remove("show");
+            setTimeout(()=>{
+            x.hidden = true;
+        }, 380)
+            // }
+        }
+        else if(!y.hidden){
+            y.classList.remove("show");
+            setTimeout(()=>{
+                y.hidden = true;
+            })
+        }
+        else if(!z.hidden){
+            z.classList.remove("show");
+            setTimeout(()=>{
+                z.hidden = true;
+            })
+        }
+
+        var t = document.getElementById('box2');//选取id为test的元素
+        if(t.hidden){
+            t.hidden = false;
+            setTimeout(function(){
+                t.classList.add("show");
+            },100)
+            // t.classList.add("show");
+        }else{
+            t.classList.remove("show");
+            setTimeout(function(){
+                t.hidden = true;
+            }, 380)
+        }
+    }
+
+    function show3(){
+        // var x = document.querySelectorAll(".scale-up-btn")
+        var x = document.getElementById('box')
+        var y = document.getElementById('box1')
+        var z = document.getElementById('box2')
+        // var x = document.querySelectorAll(".button")
+        // for(var i = 0; i < x.length; i++){
+            // document.write(x[i].hidden)
+        if(!x.hidden){
+            // document.write(x.hidden)
+            x.classList.remove("show");
+            setTimeout(()=>{
+            x.hidden = true;
+        }, 380)
+            // }
+        }
+        else if(!y.hidden){
+            y.classList.remove("show");
+            setTimeout(()=>{
+                y.hidden = true;
+            })
+        }
+        else if(!z.hidden){
+            z.classList.remove("show");
+            setTimeout(()=>{
+                z.hidden = true;
+            })
+        }
+
+        var t = document.getElementById('box3');//选取id为test的元素
+        if(t.hidden){
+            t.hidden = false;
+            setTimeout(function(){
+                t.classList.add("show");
+            },100)
+            // t.classList.add("show");
+        }else{
+            t.classList.remove("show");
+            setTimeout(function(){
+                t.hidden = true;
+            }, 380)
+        }
+    }
+    
+    function show4(){
+        var x = document.getElementById('music1')
+        if(x.paused) x.play()
+        else x.pause()
+}
+    function show5(){
+        var x = document.getElementById('music2')
+        if(x.paused) x.play()
+        else x.pause()
+}
+    function show6(){
+        var x = document.getElementById('music3')
+        if(x.paused) x.play()
+        else x.pause()
+}
+
+function show7(){
+        var x = document.getElementById('music4')
+        if(x.paused) x.play()
+        else x.pause()
+}
+    
+    
+
+    // function showbutton(){
+    //     // var t = document.getElementById('button');//选取id为test的元素
+    //     // t.hidden = false; // 设置隐藏元素
+    //     var t = document.getElementById('button');//选取id为test的元素
+    //     if(t.hidden){
+    //         t.hidden = false;
+    //         setTimeout(function(){
+    //             t.classList.add("show");
+    //         },100)
+    //         // t.classList.add("show");
+    //     }else{
+    //         t.classList.remove("show");
+    //         setTimeout(function(){
+    //             t.hidden = true;
+    //         },100)
+    //     }
+    // }
+ 
+
+</script>
+
+</body>
+</html>
